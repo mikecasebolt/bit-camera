@@ -55,6 +55,7 @@ Live Chrome webcam interactions and MediaRecorder WebM playback still require ma
 Fonts load from Google Fonts, with a monospace fallback. Model and WASM assets are bundled locally. No photos are uploaded and no paid API is required.
 
 Model: https://storage.googleapis.com/mediapipe-models/image_segmenter/selfie_segmenter/float16/latest/selfie_segmenter.tflite
+
 Documentation: https://developers.google.com/edge/mediapipe/solutions/vision/image_segmenter
 
 ## GitHub Pages
