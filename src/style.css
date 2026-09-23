@@ -593,3 +593,14 @@ legend {
     min-width: 24px;
   }
 }
+.capture-controls .actions {
+  margin: 14px 0 10px;
+}
+.camera-switch {
+  width: 100%;
+  padding: 10px;
+  background: transparent;
+  border: 1px solid var(--ink);
+  font-size: 12px;
+  min-height: 40px;
+}

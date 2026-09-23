@@ -18,6 +18,7 @@ Open the printed localhost URL in Chrome. Click START CAMERA and allow camera pe
 - Resolution: 64 × 56, 128 × 112, 256 × 224, or 512 × 448. Photo sources are retained at 512 × 448 so changing pixel resolution is reversible.
 - COLOR TONES: select 2, 3, or 4 before or after capture. Two uses dark/light; three adds the accent tone; four uses the whole palette. Backgrounds, outlines and exports respect this limit.
 - BG / CNT / EXP / DTH / PAL adjust background noise, contrast, exposure, dithering and palette before or after capture.
+- The shutter/record controls sit immediately below the viewfinder. A front/rear switch appears while the camera is active and is enabled when multiple camera inputs are reported. Switching releases the current camera before requesting the other facing direction, with a fallback to the previous camera. Selfies are mirrored; rear-camera views are not. Physical phone verification remains pending.
 - PHOTO, 6 FRAMES, or 8 FRAMES. Loops capture at a target 4 frames/sec and play at 4 frames/sec, for 1.5 or 2 seconds. Keep the tab visible during capture. B cancels an unfinished loop.
 - A or Space captures. B or Escape returns from review. In loop review, Space toggles playback; numbered buttons select individual frames.
 - Post-capture FLAT CUTOUT removes background texture. Pick any palette tone as the background, add a 1–3 pixel darkest-tone outline, and tune mask cleanup and edge trim.

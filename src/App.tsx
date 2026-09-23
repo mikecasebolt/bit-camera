@@ -39,6 +39,8 @@ export default function App() {
     generation = useRef(0);
   const [source, setSource] = useState<'off' | 'camera' | 'image'>('off'),
     [busy, setBusy] = useState(false),
+    [facing, setFacing] = useState<'user' | 'environment'>('user'),
+    [cameraCount, setCameraCount] = useState(0),
     [settings, setSettings] = useState<Settings>({ ...defaults }),
     [tab, setTab] = useState<(typeof names)[number]>('BG'),
     [message, setMessage] = useState(''),
@@ -102,7 +104,10 @@ export default function App() {
     setPlaying(false);
     setEdit({ ...defaultEdit });
   }
-  async function start() {
+  async function start(
+    requested: 'user' | 'environment' = facing,
+    switching = false,
+  ) {
     if (busy) return;
     stop();
     const id = generation.current;
@@ -113,10 +118,28 @@ export default function App() {
         throw Error(
           'Open this app in Chrome on HTTPS or localhost to use the webcam.',
         );
-      const s = await navigator.mediaDevices.getUserMedia({
-        video: { width: { ideal: 1280 }, height: { ideal: 720 } },
-        audio: false,
-      });
+      let chosen = requested;
+      let s: MediaStream;
+      try {
+        s = await navigator.mediaDevices.getUserMedia({
+          video: {
+            width: { ideal: 1280 },
+            height: { ideal: 720 },
+            facingMode: switching ? { exact: requested } : { ideal: requested },
+          },
+          audio: false,
+        });
+      } catch (error) {
+        if (!switching || id !== generation.current) throw error;
+        chosen = facing;
+        s = await navigator.mediaDevices.getUserMedia({
+          video: { facingMode: { ideal: facing } },
+          audio: false,
+        });
+        setMessage(
+          'That camera is unavailable. Returned to your previous camera.',
+        );
+      }
       if (id !== generation.current) {
         s.getTracks().forEach((t) => t.stop());
         return;
@@ -125,6 +148,23 @@ export default function App() {
       video.current!.srcObject = s;
       await video.current!.play();
       if (id !== generation.current) return;
+      const actual = s.getVideoTracks()[0].getSettings().facingMode;
+      setFacing(
+        actual === 'environment'
+          ? 'environment'
+          : actual === 'user'
+            ? 'user'
+            : chosen,
+      );
+      navigator.mediaDevices
+        .enumerateDevices()
+        .then((devices) => {
+          if (id === generation.current)
+            setCameraCount(
+              devices.filter((d) => d.kind === 'videoinput').length,
+            );
+        })
+        .catch(() => setCameraCount(0));
       still.current = null;
       resetReview();
       setSource('camera');
@@ -206,7 +246,7 @@ export default function App() {
       ctx.fillStyle = '#ffffff';
       ctx.fillRect(0, 0, RAW_W, RAW_H);
       ctx.save();
-      if (source === 'camera') {
+      if (source === 'camera' && facing === 'user') {
         ctx.translate(RAW_W, 0);
         ctx.scale(-1, 1);
       }
@@ -263,7 +303,7 @@ export default function App() {
     };
     raf = requestAnimationFrame(draw);
     return () => cancelAnimationFrame(raf);
-  }, [source, review, settings, w, h, modelStatus, revision]);
+  }, [source, review, settings, w, h, modelStatus, revision, facing]);
   // If a shutter preceded model loading, resolve masks from the retained source,
   // not a later webcam frame or the already-quantized preview.
   useEffect(() => {
@@ -480,7 +520,11 @@ export default function App() {
                 <br />
                 RESOLUTION.
               </p>
-              <button className="start-button" onClick={start} disabled={busy}>
+              <button
+                className="start-button"
+                onClick={() => void start()}
+                disabled={busy}
+              >
                 {busy ? 'CONNECTING…' : 'START CAMERA ↗'}
               </button>
               <span className="start-note">OR LOAD A PHOTO BELOW</span>
@@ -509,6 +553,54 @@ export default function App() {
           </span>
         </div>
       </section>
+      {!review && (
+        <section aria-label="Capture controls" className="capture-controls">
+          <div className="actions">
+            <button
+              className="secondary"
+              onClick={() => {
+                if (progress) {
+                  recording.current = null;
+                  setProgress(0);
+                } else setSettings({ ...defaults });
+              }}
+            >
+              <b>B</b>
+              {progress ? 'CANCEL' : 'RESET'}
+            </button>
+            <button
+              className="shutter"
+              disabled={!ready || progress > 0 || busy}
+              onClick={capture}
+            >
+              <b>A</b>
+              {progress
+                ? `RECORDING ${progress}/${mode}`
+                : mode === 1
+                  ? 'TAKE PHOTO'
+                  : `RECORD ${mode} FRAMES`}
+              <span>↗</span>
+            </button>
+          </div>
+
+          {source === 'camera' && (
+            <button
+              className="camera-switch"
+              disabled={busy || locked || cameraCount < 2}
+              onClick={() =>
+                void start(facing === 'user' ? 'environment' : 'user', true)
+              }
+              aria-label="Switch front or rear camera"
+            >
+              {busy
+                ? 'SWITCHING…'
+                : cameraCount < 2
+                  ? 'ONE CAMERA AVAILABLE'
+                  : `↻ ${facing === 'user' ? 'USE REAR CAMERA' : 'USE FRONT CAMERA'}`}
+            </button>
+          )}
+        </section>
+      )}
       {message && (
         <p role="alert" className="notice">
           {message}
@@ -864,35 +956,7 @@ export default function App() {
             </div>
           </section>
         </>
-      ) : (
-        <div className="actions">
-          <button
-            className="secondary"
-            onClick={() => {
-              if (progress) {
-                recording.current = null;
-                setProgress(0);
-              } else setSettings({ ...defaults });
-            }}
-          >
-            <b>B</b>
-            {progress ? 'CANCEL' : 'RESET'}
-          </button>
-          <button
-            className="shutter"
-            disabled={!ready || progress > 0 || busy}
-            onClick={capture}
-          >
-            <b>A</b>
-            {progress
-              ? `RECORDING ${progress}/${mode}`
-              : mode === 1
-                ? 'TAKE PHOTO'
-                : `RECORD ${mode} FRAMES`}
-            <span>↗</span>
-          </button>
-        </div>
-      )}
+      ) : null}
       <div className="source-actions">
         <button disabled={locked || busy} onClick={() => file.current?.click()}>
           ↑ LOAD PHOTO
