@@ -976,6 +976,7 @@ export default function App() {
       </div>
       <footer>
         <span>MADE OF PIXELS. KEPT ON YOUR DEVICE.</span>
+        <span>GOOGLE ANALYTICS MEASURES VISITS. PHOTOS STAY ON YOUR DEVICE.</span>
         <span>
           SPACE = {review && frames.length > 1 ? 'PLAY / PAUSE' : 'SHUTTER'}
         </span>

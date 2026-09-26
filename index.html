@@ -9,6 +9,25 @@
       content="Your webcam, in four colors. A tiny pixel camera with background control and crisp photo exports."
     />
     <title>Bit Camera</title>
+    <script>
+      // Keep local previews and other people's forks out of this site's analytics.
+      if (
+        window.location.hostname === 'mikecasebolt.github.io' &&
+        window.location.pathname.startsWith('/bit-camera/')
+      ) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { window.dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-RHQ0TVD6M2', {
+          allow_google_signals: false,
+          allow_ad_personalization_signals: false,
+        });
+        const tag = document.createElement('script');
+        tag.async = true;
+        tag.src = 'https://www.googletagmanager.com/gtag/js?id=G-RHQ0TVD6M2';
+        document.head.appendChild(tag);
+      }
+    </script>
   </head>
   <body>
     <div id="root"></div>

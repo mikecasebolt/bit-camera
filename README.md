@@ -55,6 +55,8 @@ Live Chrome webcam interactions and MediaRecorder WebM playback still require ma
 
 Fonts load from Google Fonts, with a monospace fallback. Model and WASM assets are bundled locally. No photos are uploaded and no paid API is required.
 
+The GitHub Pages site uses Google Analytics (`G-RHQ0TVD6M2`) for visitor measurement. The tag loads only on `mikecasebolt.github.io/bit-camera/`, so local previews and forks do not report to this property. Google Signals and ad personalization signals are disabled. No camera frames, uploaded images, segmentation masks, or exports are passed to analytics. The measurement ID is a public site identifier, not an account credential. If remixing or changing hosts, update the hostname/path guard and measurement ID in `index.html` for your own site.
+
 Model: https://storage.googleapis.com/mediapipe-models/image_segmenter/selfie_segmenter/float16/latest/selfie_segmenter.tflite
 
 Documentation: https://developers.google.com/edge/mediapipe/solutions/vision/image_segmenter
