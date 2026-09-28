@@ -470,7 +470,7 @@ export default function App() {
       <header>
         <BrandMark />
         <h1 className="wordmark">BIT CAMERA</h1>
-        <span className="edition">Digital Toy</span>
+        <span className="edition">DIGITAL TOY</span>
       </header>
       <section className="camera-panel" aria-label="Pixel camera">
         <div className="status">
