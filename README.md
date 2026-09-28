@@ -66,3 +66,9 @@ Documentation: https://developers.google.com/edge/mediapipe/solutions/vision/ima
 The public test site is https://mikecasebolt.github.io/bit-camera/ . Pushes to `main` run tests, build, and deploy automatically through GitHub Actions. In repository Settings → Pages, the deployment source is GitHub Actions.
 
 For a local Pages-style build, run `PAGES_BASE_PATH=/bit-camera/ npm run build`. The default build still serves from `/`. Model and WASM paths follow the configured base path.
+
+## License and remixing
+
+Bit Camera's original code is available under the [MIT License](LICENSE). You can modify, share, and use it commercially; retain the copyright and license notice. Third-party dependencies and bundled model/WASM assets remain under their respective licenses.
+
+To remix, fork this repository, install dependencies with `npm ci`, and start it with `npm run dev`. Before publishing, update the creator credit and repository link for your version, and configure or remove the Google Analytics tag in `index.html`. Its hostname guard prevents forks from sending visits to the original site's analytics. Set `PAGES_BASE_PATH` in the Pages workflow to your repository's path if you rename it.

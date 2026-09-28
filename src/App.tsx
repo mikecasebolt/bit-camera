@@ -963,9 +963,10 @@ export default function App() {
           <li>PHOTOS STAY ON YOUR DEVICE.</li>
           <li>SPACE = {review && frames.length > 1 ? 'PLAY / PAUSE' : 'SHUTTER'}</li>
         </ul>
-        <a className="creator-credit" href="https://www.caseboltdesign.com/" target="_blank" rel="noopener noreferrer">
-          Built by Caseboltdesign.com
-        </a>
+        <div className="creator-credit">
+          <span>BUILT BY <a href="https://www.caseboltdesign.com/" target="_blank" rel="noopener noreferrer">CASEBOLTDESIGN.COM</a></span>
+          <a href="https://github.com/mikecasebolt/bit-camera" target="_blank" rel="noopener noreferrer">REMIX ON GITHUB ↗</a>
+        </div>
       </footer>
       <video ref={video} muted playsInline hidden />
       <input
