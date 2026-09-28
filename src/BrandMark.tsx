@@ -15,7 +15,7 @@ export function BrandMark() {
   return (
     <span className="brand-mark" aria-hidden="true">
       {frames.map((pixels, frame) => (
-        <svg key={frame} viewBox="0 0 120 120" width="48" height="48"
+        <svg key={frame} viewBox="0 0 120 120" width="24" height="24"
           className="brand-mark-frame" style={{ animationDelay: `${frame * 400}ms` }}>
           {pixels.map(([x, y]) => (
             <rect key={`${x}-${y}`} x={x * 24} y={y * 24} width="24" height="24" />
