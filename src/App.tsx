@@ -475,7 +475,7 @@ export default function App() {
       <section className="camera-panel" aria-label="Pixel camera">
         <div className="status">
           <span>
-            <i className={source === 'camera' && !review ? 'live' : ''} />
+            <i aria-hidden="true" className={progress > 0 ? 'recording' : source === 'camera' && !review ? 'live' : ''} />
             {progress
               ? `REC ${progress}/${mode}`
               : review
@@ -487,11 +487,6 @@ export default function App() {
                   : source === 'image'
                     ? 'PHOTO INPUT'
                     : 'CAM 01'}
-          </span>
-          <span>
-            <b className="battery" aria-label="Decorative battery">
-              ▰▰▰
-            </b>
           </span>
         </div>
         <div className={'viewfinder ' + (review ? 'freeze' : '')}>

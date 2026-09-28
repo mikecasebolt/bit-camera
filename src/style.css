@@ -110,13 +110,10 @@ header {
 }
 .status i.live {
   background: var(--orange);
-  animation: blink 2s steps(2) infinite;
 }
-.battery {
-  border: 1px solid var(--paper);
-  font-size: 8px;
-  padding: 1px 3px;
-  letter-spacing: 1px;
+.status i.recording {
+  background: #ef5350;
+  animation: recording-pulse 1.6s ease-in-out infinite;
 }
 .viewfinder {
   aspect-ratio: 8/7;
@@ -373,10 +370,9 @@ footer {
     filter: brightness(1);
   }
 }
-@keyframes blink {
-  50% {
-    opacity: 0.3;
-  }
+@keyframes recording-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
 }
 @media (max-width: 480px) {
   .camera-app {
