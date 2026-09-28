@@ -143,6 +143,7 @@ header {
   height: 38px;
   object-fit: contain;
   flex-shrink: 0;
+  margin-bottom: 26px;
 }
 .start-screen p {
   font-family: 'Space Mono', monospace;

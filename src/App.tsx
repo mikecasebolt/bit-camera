@@ -499,11 +499,6 @@ export default function App() {
           {source === 'off' && !review && (
             <div className="start-screen">
               <img className="crosshair" src={cameraIcon} width="38" height="38" alt="" aria-hidden="true" />
-              <p>
-                A LITTLE LESS
-                <br />
-                RESOLUTION.
-              </p>
               <button
                 className="start-button"
                 onClick={() => void start()}
