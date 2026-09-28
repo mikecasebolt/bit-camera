@@ -952,7 +952,8 @@ export default function App() {
       <footer>
         <ul className="footer-notes">
           <li>MADE OF PIXELS. KEPT ON YOUR DEVICE.</li>
-          <li>GOOGLE ANALYTICS MEASURES VISITS. PHOTOS STAY ON YOUR DEVICE.</li>
+          <li>GOOGLE ANALYTICS MEASURES VISITS.</li>
+          <li>PHOTOS STAY ON YOUR DEVICE.</li>
           <li>SPACE = {review && frames.length > 1 ? 'PLAY / PAUSE' : 'SHUTTER'}</li>
         </ul>
       </footer>
