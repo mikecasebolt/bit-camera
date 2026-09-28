@@ -1,3 +1,4 @@
+import { BrandMark } from './BrandMark';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import {
   palettes,
@@ -466,20 +467,11 @@ export default function App() {
   return (
     <main className="camera-app">
       <header>
-        <div className="wordmark">
-          <span className="camera-icon" aria-hidden="true">
-            ▣
-          </span>{' '}
-          Bit Camera
-          <span className="spark" aria-hidden="true">
-            ✳
-          </span>
+        <BrandMark />
+        <div className="brand-copy">
+          <h1 className="wordmark">Bit Camera</h1>
+          <span className="edition">Digital Toy</span>
         </div>
-        <span className="edition">
-          DIGITAL TOY
-          <br />
-          NO. 002
-        </span>
       </header>
       <div className="rule" />
       <section className="camera-panel" aria-label="Pixel camera">
