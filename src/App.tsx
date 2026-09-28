@@ -386,18 +386,41 @@ export default function App() {
     resetReview();
   }
   useEffect(() => {
+    let shiftOnly = false;
+    const editingText = (e: KeyboardEvent) =>
+      e.target instanceof HTMLElement &&
+      !!e.target.closest('input,select,textarea,[contenteditable="true"]');
     const key = (e: KeyboardEvent) => {
-      if ((e.target as HTMLElement).closest('button,input,select,textarea'))
+      if (e.key === 'Shift') {
+        if (!e.repeat) shiftOnly = !editingText(e) && !e.ctrlKey && !e.altKey && !e.metaKey;
         return;
-      if (e.code === 'Space' || e.key.toLowerCase() === 'a') {
+      }
+      shiftOnly = false;
+      if (e.repeat || editingText(e) || e.ctrlKey || e.altKey || e.metaKey) return;
+      if (e.code === 'Space' && review && frames.length > 1 &&
+          !(e.target instanceof HTMLElement && e.target.closest('button'))) {
         e.preventDefault();
-        if (review && frames.length > 1) setPlaying((v) => !v);
-        else capture();
+        setPlaying((v) => !v);
       }
       if (e.key === 'Escape' || e.key.toLowerCase() === 'b') back();
     };
+    const release = (e: KeyboardEvent) => {
+      if (e.key !== 'Shift') return;
+      const shouldCapture = shiftOnly && !editingText(e) && !review;
+      shiftOnly = false;
+      if (shouldCapture) capture();
+    };
+    const cancelShift = () => { shiftOnly = false; };
     window.addEventListener('keydown', key);
-    return () => window.removeEventListener('keydown', key);
+    window.addEventListener('keyup', release);
+    window.addEventListener('blur', cancelShift);
+    window.addEventListener('pointerdown', cancelShift);
+    return () => {
+      window.removeEventListener('keydown', key);
+      window.removeEventListener('keyup', release);
+      window.removeEventListener('blur', cancelShift);
+      window.removeEventListener('pointerdown', cancelShift);
+    };
   }, [ready, review, locked, mode, source, frames.length, exporting]);
   async function save(kind: 'png' | 'gray' | 'gif' | 'webm', scale = 1) {
     if (exporting) return;
@@ -536,7 +559,7 @@ export default function App() {
               disabled={!ready || progress > 0 || busy}
               onClick={capture}
             >
-              <b>A</b>
+              <span className="capture-key">SHIFT</span>
               {progress
                 ? `RECORDING ${progress}/${mode}`
                 : mode === 1
@@ -555,11 +578,10 @@ export default function App() {
                 } else setSettings({ ...defaults });
               }}
             >
-              <b>B</b>
               {progress ? 'CANCEL' : 'RESET'}
             </button>
             <button className="secondary" disabled={locked || busy} onClick={() => file.current?.click()}>
-              <b aria-hidden="true">↑</b>LOAD PHOTO
+              LOAD PHOTO
             </button>
           </div>
 
@@ -961,7 +983,7 @@ export default function App() {
           <li>MADE OF PIXELS. KEPT ON YOUR DEVICE.</li>
           <li>GOOGLE ANALYTICS MEASURES VISITS.</li>
           <li>PHOTOS STAY ON YOUR DEVICE.</li>
-          <li>SPACE = {review && frames.length > 1 ? 'PLAY / PAUSE' : 'SHUTTER'}</li>
+          <li>{review && frames.length > 1 ? 'SPACE = PLAY / PAUSE' : 'SHIFT = SHUTTER'}</li>
         </ul>
         <div className="creator-credit">
           <span>BUILT BY <a href="https://www.caseboltdesign.com/" target="_blank" rel="noopener noreferrer">CASEBOLTDESIGN.COM</a></span>
