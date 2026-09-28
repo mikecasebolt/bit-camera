@@ -186,6 +186,142 @@ header {
   border-right: 3px solid;
 }
 .frame-footer {
+  height: 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 10px;
+}
+.tabs {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  margin: 20px 0 0;
+  border: 2px solid var(--ink);
+}
+.tabs button {
+  background: transparent;
+  border-right: 2px solid var(--ink);
+  padding: 5px 0 8px;
+  font-weight: bold;
+  font-size: 16px;
+}
+.tabs button:last-child {
+  border: 0;
+}
+.tabs small {
+  display: block;
+  font-size: 10px;
+  line-height: 13px;
+}
+.tabs button[aria-pressed='true'] {
+  background: var(--ink);
+  color: var(--paper);
+}
+.setting {
+  padding: 20px 0 15px;
+  border-bottom: 2px solid var(--ink);
+}
+.setting-title {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  font-size: 12px;
+  align-items: center;
+}
+.setting-title strong {
+  font-size: 14px;
+}
+.stepper {
+  display: flex;
+  gap: 12px;
+  margin: 14px 0;
+}
+.stepper button {
+  border: 2px solid var(--ink);
+  background: transparent;
+  font-size: 25px;
+  line-height: 38px;
+  width: 42px;
+  flex: none;
+}
+.meter {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  flex: 1;
+}
+.meter > span {
+  flex: 1;
+  height: 25px;
+  border: 2px solid var(--ink);
+}
+.meter > span.filled {
+  background: var(--ink);
+}
+.setting-help {
+  font-size: 10px;
+  letter-spacing: 0.4px;
+  min-height: 19px;
+  color: #666050;
+}
+.swatches {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.swatches i {
+  width: 15px;
+  height: 15px;
+}
+.actions {
+  display: flex;
+  gap: 13px;
+  margin: 20px 0;
+}
+.secondary {
+  border: 2px solid var(--ink);
+  background: transparent;
+  font-size: 12px;
+  padding: 10px;
+}
+.actions b {
+  display: inline-grid;
+  place-items: center;
+  border: 1px solid currentColor;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  margin-right: 8px;
+  font-size: 14px;
+}
+.shutter {
+  background: var(--ink);
+  color: var(--paper);
+  padding: 14px 17px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  font-size: 14px;
+  font-weight: bold;
+  flex: 1;
+  box-shadow: 4px 4px 0 var(--orange);
+}
+.source-actions {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid #c6bda7;
+  padding: 4px 0 21px;
+}
+.source-actions button,
+.review-links button {
+  background: none;
+  font-size: 11px;
+  padding: 9px 0;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+footer {
   margin-top: 24px;
   font-size: 10px;
   line-height: 1.7;
