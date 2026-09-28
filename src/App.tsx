@@ -468,12 +468,9 @@ export default function App() {
     <main className="camera-app">
       <header>
         <BrandMark />
-        <div className="brand-copy">
-          <h1 className="wordmark">Bit Camera</h1>
-          <span className="edition">Digital Toy</span>
-        </div>
+        <h1 className="wordmark">BIT CAMERA</h1>
+        <span className="edition">Digital Toy</span>
       </header>
-      <div className="rule" />
       <section className="camera-panel" aria-label="Pixel camera">
         <div className="status">
           <span>
@@ -491,7 +488,6 @@ export default function App() {
                     : 'CAM 01'}
           </span>
           <span>
-            {`${settings.tones}-${edit.grayscale && review ? 'GRAY' : 'TONE'}`}{' '}
             <b className="battery" aria-label="Decorative battery">
               ▰▰▰
             </b>
@@ -537,11 +533,7 @@ export default function App() {
             {w} × {h} PX
           </span>
           <span>
-            {progress
-              ? '● HOLD YOUR POSE…'
-              : review
-                ? '✳ ORIGINAL KEPT FOR EDITING'
-                : '✳ MAKE SOMETHING SMALL'}
+            {`${settings.tones}-${edit.grayscale && review ? 'GRAY' : 'TONE'}`}
           </span>
         </div>
       </section>
