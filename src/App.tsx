@@ -527,7 +527,7 @@ export default function App() {
                 onClick={() => void start()}
                 disabled={busy}
               >
-                {busy ? 'CONNECTING…' : 'START CAMERA ↗'}
+                {busy ? 'CONNECTING…' : 'START CAMERA'}
               </button>
               <span className="start-note">OR LOAD A PHOTO BELOW</span>
             </div>
@@ -565,7 +565,6 @@ export default function App() {
                 : mode === 1
                   ? 'TAKE PHOTO'
                   : `RECORD ${mode} FRAMES`}
-              <span>↗</span>
             </button>
           </div>
           <div className="capture-secondary actions">
@@ -598,7 +597,7 @@ export default function App() {
                 ? 'SWITCHING…'
                 : cameraCount < 2
                   ? 'ONE CAMERA AVAILABLE'
-                  : `↻ ${facing === 'user' ? 'USE REAR CAMERA' : 'USE FRONT CAMERA'}`}
+                  : `${facing === 'user' ? 'USE REAR CAMERA' : 'USE FRONT CAMERA'}`}
             </button>
           )}
         </section>
@@ -919,8 +918,8 @@ export default function App() {
                   : 'SAVE PNG'}
               <span>
                 {frames.length > 1
-                  ? `${frames.length} FRAMES ↗`
-                  : `${w * 4} × ${h * 4} ↗`}
+                  ? `${frames.length} FRAMES`
+                  : `${w * 4} × ${h * 4}`}
               </span>
             </button>
             {frames.length > 1 && (
@@ -929,7 +928,7 @@ export default function App() {
                 disabled={exporting}
                 onClick={() => void save('webm')}
               >
-                SAVE VIDEO · WEBM ↗
+                SAVE VIDEO · WEBM
               </button>
             )}
             <button
@@ -938,7 +937,7 @@ export default function App() {
               onClick={() => void save('gray', 4)}
             >
               SAVE GRAYSCALE PNG · {frames.length > 1 ? 'THIS FRAME' : 'PRINT'}{' '}
-              ↗
+
             </button>
             <p className="microcopy">
               {settings.tones} neutral tones:{' '}
@@ -950,10 +949,10 @@ export default function App() {
             </p>
             <div className="review-links">
               <button disabled={exporting} onClick={back}>
-                ← RETAKE
+                RETAKE
               </button>
               <button disabled={exporting} onClick={() => void save('png', 1)}>
-                SAVE {frames.length > 1 ? 'THIS FRAME' : 'NATIVE SIZE'} ↗
+                SAVE {frames.length > 1 ? 'THIS FRAME' : 'NATIVE SIZE'}
               </button>
             </div>
           </section>
@@ -962,7 +961,7 @@ export default function App() {
       <div className="source-actions">
         {review && (
           <button disabled={locked || busy} onClick={() => file.current?.click()}>
-            ↑ LOAD PHOTO
+            LOAD PHOTO
           </button>
         )}
         <button
