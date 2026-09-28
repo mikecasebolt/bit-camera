@@ -960,11 +960,11 @@ export default function App() {
         </button>
       </div>
       <footer>
-        <span>MADE OF PIXELS. KEPT ON YOUR DEVICE.</span>
-        <span>GOOGLE ANALYTICS MEASURES VISITS. PHOTOS STAY ON YOUR DEVICE.</span>
-        <span>
-          SPACE = {review && frames.length > 1 ? 'PLAY / PAUSE' : 'SHUTTER'}
-        </span>
+        <ul className="footer-notes">
+          <li>MADE OF PIXELS. KEPT ON YOUR DEVICE.</li>
+          <li>GOOGLE ANALYTICS MEASURES VISITS. PHOTOS STAY ON YOUR DEVICE.</li>
+          <li>SPACE = {review && frames.length > 1 ? 'PLAY / PAUSE' : 'SHUTTER'}</li>
+        </ul>
       </footer>
       <video ref={video} muted playsInline hidden />
       <input
