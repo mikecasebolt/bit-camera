@@ -532,18 +532,6 @@ export default function App() {
         <section aria-label="Capture controls" className="capture-controls">
           <div className="actions">
             <button
-              className="secondary"
-              onClick={() => {
-                if (progress) {
-                  recording.current = null;
-                  setProgress(0);
-                } else setSettings({ ...defaults });
-              }}
-            >
-              <b>B</b>
-              {progress ? 'CANCEL' : 'RESET'}
-            </button>
-            <button
               className="shutter"
               disabled={!ready || progress > 0 || busy}
               onClick={capture}
@@ -555,6 +543,23 @@ export default function App() {
                   ? 'TAKE PHOTO'
                   : `RECORD ${mode} FRAMES`}
               <span>↗</span>
+            </button>
+          </div>
+          <div className="capture-secondary actions">
+            <button
+              className="secondary"
+              onClick={() => {
+                if (progress) {
+                  recording.current = null;
+                  setProgress(0);
+                } else setSettings({ ...defaults });
+              }}
+            >
+              <b>B</b>
+              {progress ? 'CANCEL' : 'RESET'}
+            </button>
+            <button className="secondary" disabled={locked || busy} onClick={() => file.current?.click()}>
+              <b aria-hidden="true">↑</b>LOAD PHOTO
             </button>
           </div>
 
@@ -933,9 +938,11 @@ export default function App() {
         </>
       ) : null}
       <div className="source-actions">
-        <button disabled={locked || busy} onClick={() => file.current?.click()}>
-          ↑ LOAD PHOTO
-        </button>
+        {review && (
+          <button disabled={locked || busy} onClick={() => file.current?.click()}>
+            ↑ LOAD PHOTO
+          </button>
+        )}
         <button
           disabled={locked || busy}
           onClick={() => {
