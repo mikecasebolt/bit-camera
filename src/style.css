@@ -629,3 +629,15 @@ legend {
   header .brand-mark { grid-row: 1 / 3; }
   .edition { grid-column: 2; }
 }
+
+.creator-credit {
+  display: inline-block;
+  margin-top: 18px;
+  color: var(--ink);
+  text-underline-offset: 4px;
+}
+.creator-credit:hover { text-decoration-thickness: 2px; }
+.creator-credit:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 5px;
+}

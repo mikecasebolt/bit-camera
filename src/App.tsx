@@ -956,6 +956,9 @@ export default function App() {
           <li>PHOTOS STAY ON YOUR DEVICE.</li>
           <li>SPACE = {review && frames.length > 1 ? 'PLAY / PAUSE' : 'SHUTTER'}</li>
         </ul>
+        <a className="creator-credit" href="https://www.caseboltdesign.com/" target="_blank" rel="noopener noreferrer">
+          Built by Caseboltdesign.com
+        </a>
       </footer>
       <video ref={video} muted playsInline hidden />
       <input
