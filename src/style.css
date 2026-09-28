@@ -141,8 +141,11 @@ header {
   background: #f39445;
 }
 .crosshair {
-  font-size: 38px;
-  font-weight: bold;
+  display: block;
+  width: 38px;
+  height: 38px;
+  object-fit: contain;
+  flex-shrink: 0;
 }
 .start-screen p {
   font-family: 'Space Mono', monospace;

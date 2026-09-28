@@ -1,3 +1,4 @@
+import cameraIcon from './assets/camera-icon.svg';
 import { BrandMark } from './BrandMark';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import {
@@ -502,7 +503,7 @@ export default function App() {
           />
           {source === 'off' && !review && (
             <div className="start-screen">
-              <span className="crosshair">＋</span>
+              <img className="crosshair" src={cameraIcon} width="38" height="38" alt="" aria-hidden="true" />
               <p>
                 A LITTLE LESS
                 <br />
